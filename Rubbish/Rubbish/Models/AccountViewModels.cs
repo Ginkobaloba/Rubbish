@@ -77,7 +77,38 @@ namespace Rubbish.Models
         [Required]
         [StringLength(30)]
         [Display(Name = "Last Name")]
+
         public string LastName { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [StringLength(30)]
+        [Display(Name = "Street Address")]
+        public string StreetNumber { get; set; }
+
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "Street Name")]
+        public string StreetName { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "Zip")]
+        public string Zip { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -85,10 +116,16 @@ namespace Rubbish.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Employee Password. Only enter if you are an employee.")]
+        public int? Passcode { get; set; }
 
 
     }
