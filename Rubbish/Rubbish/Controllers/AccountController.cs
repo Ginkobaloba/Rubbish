@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Rubbish.Models;
+using System.Collections.Generic;
 
 namespace Rubbish.Controllers
 {
@@ -155,8 +156,11 @@ namespace Rubbish.Controllers
             if (ModelState.IsValid)
             {
 
-                var address = new Address { StreetName = model.StreetName, StreetNumber = model.StreetNumber, CityID = model.City, ZipCodeID = model.Zip, State = model.State };
+               
+                
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LastName = model.LastName, FirstName = model.FirstName };
+                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -167,18 +171,24 @@ namespace Rubbish.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    if (model.Passcode == passcode)
 
+
+                    var address = new Address { StreetName = model.StreetName, StreetNumber = model.StreetNumber, CityID = model.City, ZipCodeID = model.Zip, State = model.State };
+                    db.Addresses.Add(address);
+
+                    if (model.Passcode == passcode)
                     {
-                        db.Employees.Add(new Employee() { RouteNumber = random.Next(0, 6), ApplicationUser = user });
+                        db.Employees.Add(new Employee() { RouteNumber = random.Next(0, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
 
                     }
                     else
-                    {
-                        var customer = new Customer{ MoneyOwed = 0, ApplicationUser = user };
-                        var pickUpSite = new PickupSite { Customer = customer, Address = address };
+                    { //add customer and pickupsite
+                        var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id)};
+                        var pickUpSite = new PickupSite { CustomerID = customer.ID, AddressID = address.ID }; //might need to do db.Users.Find
                     }
+                    List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
 
+                    db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
