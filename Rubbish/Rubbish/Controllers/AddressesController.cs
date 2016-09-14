@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rubbish.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Rubbish.Controllers
 {
@@ -46,17 +47,48 @@ namespace Rubbish.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCodeID,CityID")] Address address)
+        public ActionResult Create([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCodeID,CityID")] Address address) //need to make sure address id is on pickup site
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.Addresses.Add(address);
+
+                int number;
+                int routenumber;
+                int.TryParse(address.ZipCodeID, out number);
+
+                if (number < 20000)
+                    routenumber = 1;
+                else if (number < 30000)
+                    routenumber = 2;
+                else if (number < 40000)
+                    routenumber = 3;
+                else if (number < 50000)
+                    routenumber = 4;
+                else
+                    routenumber = 5;
+                
+                var pickUpSite = new PickupSite { RouteNumber = routenumber, CustomerID = GetCostumerId(), AddressID = address.ID };
+                db.PickupSites.Add(pickUpSite);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
             return View(address);
         }
+
+        private int GetCostumerId()
+  
+        {
+            string id = User.Identity.GetUserId();
+
+            int query = (from C in db.Customers where C.UserID == id select C.ID).FirstOrDefault();
+
+            return query;
+
+        }
+        
 
         // GET: Addresses/Edit/5
         public ActionResult Edit(int? id)

@@ -81,6 +81,9 @@ namespace Rubbish.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
+                   
+
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -159,7 +162,7 @@ namespace Rubbish.Controllers
 
                
                 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, LastName = model.LastName, FirstName = model.FirstName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password};
                 
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -174,28 +177,31 @@ namespace Rubbish.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
 
-                    var address = new Address { StreetName = model.StreetName, StreetNumber = model.StreetNumber, CityID = model.City, ZipCodeID = model.Zip, State = model.State };
-                    db.Addresses.Add(address);
+                 
+                    
 
-                    if (model.Passcode == passcode)//change this so that drop down works 
+                    if (model.Passcode == passcode)
                     {
-                        db.Employees.Add(new Employee() { RouteNumber = random.Next(0, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
+                        db.Employees.Add(new Employee() { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
                      
                             /*var result1 =*/ UserManager.AddToRole(user.Id, "Employee");                        
                     }
                     else
                     { 
                         var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id)};
+                       
                         db.Customers.Add(customer);
-                        var pickUpSite = new PickupSite { CustomerID = customer.ID, AddressID = address.ID }; //might need to do db.Users.Find
-                        db.PickupSites.Add(pickUpSite);
 
                         UserManager.AddToRole(user.Id, "Customer");
+
+                        return RedirectToAction("Create", "Address");
+
                     }   
                     //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
 
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    // evaluate roles
+                    
                 }
                 AddErrors(result);
             }
@@ -475,7 +481,7 @@ namespace Rubbish.Controllers
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private ActionResult RedirectToLocal(string returnUrl)//needs changes
         {
             if (Url.IsLocalUrl(returnUrl))
             {

@@ -39,7 +39,7 @@ namespace Rubbish.Controllers
         // GET: PickupSites/Create
         public ActionResult Create()
         {
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "StreetNumber");
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "AddressID");
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID");
             return View();
         }
@@ -58,8 +58,7 @@ namespace Rubbish.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "StreetNumber", pickupSite.AddressID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID", pickupSite.CustomerID);
+
             return View(pickupSite);
         }
 
@@ -75,7 +74,7 @@ namespace Rubbish.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "StreetNumber", pickupSite.AddressID);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "AddressID", pickupSite.AddressID);
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID", pickupSite.CustomerID);
             return View(pickupSite);
         }
@@ -93,7 +92,7 @@ namespace Rubbish.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "StreetNumber", pickupSite.AddressID);
+            ViewBag.AddressID = new SelectList(db.Addresses, "ID", "AddressID", pickupSite.AddressID);
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID", pickupSite.CustomerID);
             return View(pickupSite);
         }
