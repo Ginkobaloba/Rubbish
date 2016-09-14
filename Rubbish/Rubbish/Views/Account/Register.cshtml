@@ -24,6 +24,13 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.Label("User Role", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("Name")
+            @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, " ")
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })

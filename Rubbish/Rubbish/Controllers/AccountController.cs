@@ -140,6 +140,7 @@ namespace Rubbish.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Name = new SelectList(db.Roles.Where(t => !t.Name.Contains("Admin")).ToList(), "Name", "Name");
             return View();
         }
 
@@ -176,28 +177,22 @@ namespace Rubbish.Controllers
                     var address = new Address { StreetName = model.StreetName, StreetNumber = model.StreetNumber, CityID = model.City, ZipCodeID = model.Zip, State = model.State };
                     db.Addresses.Add(address);
 
-                    if (model.Passcode == passcode)
+                    if (model.Passcode == passcode)//change this so that drop down works 
                     {
                         db.Employees.Add(new Employee() { RouteNumber = random.Next(0, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
-                        if (chkUser.Succeeded)
-                        {
-                            var result1 = UserManager.AddToRole(user.Id, "Employee");
-
-                        }
+                     
+                            /*var result1 =*/ UserManager.AddToRole(user.Id, "Employee");                        
                     }
                     else
-                    { //add customer and pickupsite
+                    { 
                         var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id)};
                         db.Customers.Add(customer);
                         var pickUpSite = new PickupSite { CustomerID = customer.ID, AddressID = address.ID }; //might need to do db.Users.Find
                         db.PickupSites.Add(pickUpSite);
-                        if (chkUser.Succeeded)
-                        {
-                            var result1 = UserManager.AddToRole(user.Id, "Customer");
 
-                        }
+                        UserManager.AddToRole(user.Id, "Customer");
                     }   
-                    List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
+                    //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
 
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
