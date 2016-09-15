@@ -15,8 +15,8 @@ namespace Rubbish.Migrations
                         StreetNumber = c.String(),
                         StreetName = c.String(),
                         State = c.String(),
-                        ZipCodeID = c.String(),
-                        CityID = c.String(),
+                        ZipCode = c.String(),
+                        City = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             

@@ -46,8 +46,7 @@ namespace Rubbish.Models
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<PickupSite> PickupSites { get; set; }
         public DbSet<Vacation> Vacations { get; set; }
-        public DbSet<Vacation_Pickup> Vacations_Pickups { get; set; }
+        public DbSet<Customer_Vacation> Customer_Vacation { get; set; }
     }
 }

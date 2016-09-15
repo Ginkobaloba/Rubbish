@@ -20,5 +20,9 @@ namespace Rubbish.Models
 
         public decimal MoneyOwed { get; set; }
 
+        public int DayOfWeek { get; set; }
+
+        public bool IsActive { get; set; }
+
     }
 }

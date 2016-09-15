@@ -199,13 +199,12 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\Authenication.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\Customer_VacationController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PickupSitesController.cs" />
     <Compile Include="Controllers\VacationsController.cs" />
-    <Compile Include="Controllers\Vacation_PickupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,17 +232,24 @@
     <Compile Include="Migrations\201609141401043_sup.Designer.cs">
       <DependentUpon>201609141401043_sup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609151441456_Complete rebuild.cs" />
+    <Compile Include="Migrations\201609151441456_Complete rebuild.Designer.cs">
+      <DependentUpon>201609151441456_Complete rebuild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609151453478_removed Pickups.cs" />
+    <Compile Include="Migrations\201609151453478_removed Pickups.Designer.cs">
+      <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Customer_Vacation.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PickupSite.cs" />
     <Compile Include="Models\Vacation.cs" />
-    <Compile Include="Models\Vacation_Pickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -338,6 +344,11 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Customer_Vacation\Create.cshtml" />
+    <Content Include="Views\Customer_Vacation\Delete.cshtml" />
+    <Content Include="Views\Customer_Vacation\Details.cshtml" />
+    <Content Include="Views\Customer_Vacation\Edit.cshtml" />
+    <Content Include="Views\Customer_Vacation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,6 +381,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609141401043_sup.resx">
       <DependentUpon>201609141401043_sup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609151441456_Complete rebuild.resx">
+      <DependentUpon>201609151441456_Complete rebuild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609151453478_removed Pickups.resx">
+      <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

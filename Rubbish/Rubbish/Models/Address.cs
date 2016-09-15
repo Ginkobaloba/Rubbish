@@ -24,6 +24,11 @@ namespace Rubbish.Models
 
         public string City { get; set; }
 
+        [ForeignKey("Customer")]
+        public int CustomerID { get; set; }
+
+        public Customer Customer { get; set; }
+
 
     }
 }

@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Customer.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.UserID)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.StreetNumber)
         </dt>
 
@@ -35,19 +43,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ZipCodeID)
+            @Html.DisplayNameFor(model => model.ZipCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ZipCodeID)
+            @Html.DisplayFor(model => model.ZipCode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CityID)
+            @Html.DisplayNameFor(model => model.City)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CityID)
+            @Html.DisplayFor(model => model.City)
         </dd>
 
     </dl>

@@ -153,15 +153,15 @@ namespace Rubbish.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task
-           <ActionResult> Register(RegisterViewModel model)
+          <ActionResult> Register(RegisterViewModel model)
         {
             int passcode = 1234;
             Random random = new Random();
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password};
-                
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password };
+
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -178,26 +178,27 @@ namespace Rubbish.Controllers
                     if (model.Passcode == passcode)
                     {
                         db.Employees.Add(new Employee() { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
-                     
-                            /*var result1 =*/ UserManager.AddToRole(user.Id, "Employee"); 
+
+                        /*var result1 =*/
+                        UserManager.AddToRole(user.Id, "Employee");
                         //Something with redirect here                       
                     }
                     else
-                    { 
-                        var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id)};
-                       
+                    {
+                        var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id) };
+
                         db.Customers.Add(customer);
 
                         UserManager.AddToRole(user.Id, "Customer");
 
                         return RedirectToAction("Create", "Address");
 
-                    }   
+                    }
                     //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
 
                     db.SaveChanges();
                     // evaluate roles
-                    
+
                 }
                 AddErrors(result);
             }
