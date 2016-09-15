@@ -160,8 +160,6 @@ namespace Rubbish.Controllers
             if (ModelState.IsValid)
             {
 
-               
-                
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password};
                 
 
@@ -177,14 +175,12 @@ namespace Rubbish.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
 
-                 
-                    
-
                     if (model.Passcode == passcode)
                     {
                         db.Employees.Add(new Employee() { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
                      
-                            /*var result1 =*/ UserManager.AddToRole(user.Id, "Employee");                        
+                            /*var result1 =*/ UserManager.AddToRole(user.Id, "Employee"); 
+                        //Something with redirect here                       
                     }
                     else
                     { 

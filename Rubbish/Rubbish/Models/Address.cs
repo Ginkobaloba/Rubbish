@@ -19,10 +19,10 @@ namespace Rubbish.Models
         
         public string State { get; set; }
 
-        public string ZipCodeID { get; set; }
+        public string ZipCode { get; set; }
 
 
-        public string CityID { get; set; }
+        public string City { get; set; }
 
 
     }
