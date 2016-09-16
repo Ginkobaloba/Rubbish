@@ -47,6 +47,5 @@ namespace Rubbish.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vacation> Vacations { get; set; }
-        public DbSet<Customer_Vacation> Customer_Vacation { get; set; }
     }
 }

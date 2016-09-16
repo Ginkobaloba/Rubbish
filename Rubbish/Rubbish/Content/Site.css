@@ -22,3 +22,52 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.jumbotron {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 70px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.jumbotron h1 {
+  line-height: 3;
+  color: inherit;
+  text-align: center;
+}
+
+.jumbotron p {
+  line-height: 1;
+  text-align: center;
+}
+
+.container .jumbotron {
+  border-radius: 6px;
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .jumbotron h1 {
+    font-size: 120px; 
+    font-family:'Bradley Hand ITC';
+  }
+}
+
+.navbar {
+  position: relative;
+  z-index: 1000;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  color: darkorchid;
+}

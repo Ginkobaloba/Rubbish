@@ -86,31 +86,6 @@ namespace Rubbish.Models
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [StringLength(30)]
-        [Display(Name = "Street Address")]
-        public string StreetNumber { get; set; }
-
-
-        [Required]
-        [StringLength(30)]
-        [Display(Name = "Street Name")]
-        public string StreetName { get; set; }
-
-        [Required]
-        [StringLength(30)]
-        [Display(Name = "City")]
-        public string City { get; set; }
-
-        [Required]
-        [StringLength(30)]
-        [Display(Name = "State")]
-        public string State { get; set; }
-
-        [Required]
-        [StringLength(30)]
-        [Display(Name = "Zip")]
-        public string Zip { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -128,10 +103,10 @@ namespace Rubbish.Models
         [Display(Name = "Employee Password. Only enter if you are an employee.")]
         public int? Passcode { get; set; }
 
-
     }
+   
 
-    public class ResetPasswordViewModel
+        public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]

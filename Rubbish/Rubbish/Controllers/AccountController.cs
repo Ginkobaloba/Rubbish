@@ -160,7 +160,7 @@ namespace Rubbish.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
 
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -179,19 +179,19 @@ namespace Rubbish.Controllers
                     {
                         db.Employees.Add(new Employee() { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
 
-                        /*var result1 =*/
-                        UserManager.AddToRole(user.Id, "Employee");
+                        var result1 = UserManager.AddToRole(user.Id, "Employee");
                         //Something with redirect here                       
                     }
                     else
                     {
-                        var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id) };
+                        var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id), UserID = user.Id };
 
                         db.Customers.Add(customer);
 
                         UserManager.AddToRole(user.Id, "Customer");
+                        db.SaveChanges();
 
-                        return RedirectToAction("Create", "Address");
+                        return RedirectToAction("Index", "Manage");
 
                     }
                     //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
@@ -206,6 +206,7 @@ namespace Rubbish.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+       
 
         //
         // GET: /Account/ConfirmEmail

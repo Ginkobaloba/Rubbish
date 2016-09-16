@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rubbish.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Rubbish.Controllers
 {
@@ -17,8 +18,7 @@ namespace Rubbish.Controllers
         // GET: Addresses
         public ActionResult Index()
         {
-            var addresses = db.Addresses.Include(a => a.Customer);
-            return View(addresses.ToList());
+            return View(db.Addresses.ToList());
         }
 
         // GET: Addresses/Details/5
@@ -39,7 +39,6 @@ namespace Rubbish.Controllers
         // GET: Addresses/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID");
             return View();
         }
 
@@ -47,22 +46,33 @@ namespace Rubbish.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-        hilaryberigan[9:22 AM]
         [HttpPost]
-               [ValidateAntiForgeryToken]
-       public ActionResult Create([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCode,City,CustomerID,RouteNumber")] Address address) //need to make sure address id is on pickup site
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCode,City,RouteNumber")] Address address) //need to make sure address id is on pickup site
         {
             if (ModelState.IsValid)
             {
                 db.Addresses.Add(address);
 
-                db.SaveChanges();
+                var query = (from c in db.Customers where c.UserID == User.Identity.GetUserId() select c).FirstOrDefault();
+
+                query.AddressID = address.ID;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+
+                }
 
                 int number;
-                int routenumber;
+                int routenumber = 0;
 
 
-                int.TryParse(address.ZipCode, out number); //should this be in a different method on it's own? SetRouteNumber()..
+                int.TryParse(address.ZipCode, out number);
 
                 if (number < 20000)
                     routenumber = 1;
@@ -75,22 +85,33 @@ namespace Rubbish.Controllers
                 else
                     routenumber = 5;
 
-                //not sure if this is right... address.id? should address id be on customer or user?
+                address.RouteNumber = routenumber;
+
 
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Manage");
             }
             return View(address);
         }
 
-        private int GetCustomerId()
+        private int? GetCustomerId()
         {
-            string id = User.Identity.GetUserId();
+            try
+            {
+                string id = User.Identity.GetUserId();
 
-            int query = (from C in db.Customers where C.UserID == id select C.ID).FirstOrDefault();
+                int? query = (from C in db.Customers where C.UserID == id select C.ID).FirstOrDefault();
 
-            return query;
+                return query;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+
         }
 
         // GET: Addresses/Edit/5
@@ -105,7 +126,6 @@ namespace Rubbish.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID", address.CustomerID);
             return View(address);
         }
 
@@ -114,7 +134,7 @@ namespace Rubbish.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCode,City,CustomerID")] Address address)
+        public ActionResult Edit([Bind(Include = "ID,StreetNumber,StreetName,State,ZipCode,RouteNumber,City")] Address address)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +142,6 @@ namespace Rubbish.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "UserID", address.CustomerID);
             return View(address);
         }
 

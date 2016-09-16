@@ -7,6 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rubbish.Models;
+using System.Globalization;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+
 
 namespace Rubbish.Controllers
 {
@@ -35,8 +42,6 @@ namespace Rubbish.Controllers
             }
             return View(customer);
         }
-
-        // GET: Customers/Create
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.Users, "Id", "FirstName");
@@ -61,6 +66,43 @@ namespace Rubbish.Controllers
             return View(customer);
         }
 
+        [AllowAnonymous]
+        public ActionResult RegisterCustomer()
+        {
+            ViewBag.Name = new SelectList(db.Roles.Where(t => !t.Name.Contains("Admin")).ToList(), "Name", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterCustomer(RegisterCustomerViewModel model)
+        {
+            //logic for setting user info to database       //AddErrors(result);
+
+            //some sort of try catch here?
+
+            if (ModelState.IsValid)
+            {
+
+        
+
+
+
+                return RedirectToAction("Index", "Manage");
+
+            }
+            //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
+
+            db.SaveChanges();
+            // evaluate roles
+
+  
+            
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -92,6 +134,7 @@ namespace Rubbish.Controllers
             }
             ViewBag.UserID = new SelectList(db.Users, "Id", "FirstName", customer.UserID);
             return View(customer);
+
         }
 
         // GET: Customers/Delete/5

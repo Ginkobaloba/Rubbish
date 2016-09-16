@@ -21,14 +21,9 @@ namespace Rubbish.Models
 
         public string ZipCode { get; set; }
 
+        public int RouteNumber { get; set; }
 
         public string City { get; set; }
-
-        [ForeignKey("Customer")]
-        public int CustomerID { get; set; }
-
-        public Customer Customer { get; set; }
-
 
     }
 }

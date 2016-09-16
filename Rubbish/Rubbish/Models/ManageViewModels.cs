@@ -7,11 +7,53 @@ namespace Rubbish.Models
 {
     public class IndexViewModel
     {
-        public bool HasPassword { get; set; }
-        public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool TwoFactor { get; set; }
-        public bool BrowserRemembered { get; set; }
+
+     
+
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+   
+
+            [Display(Name = "Last Name")]
+
+            public string LastName { get; set; }
+
+    
+     
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
+  
+  
+            [Display(Name = "Street Address")]
+            public string StreetNumber { get; set; }
+
+
+
+            [Display(Name = "Street Name")]
+            public string StreetName { get; set; }
+
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+
+            [Display(Name = "State")]
+            public string State { get; set; }
+
+            [Display(Name = "Zip")]
+            public string ZipCode { get; set; }
+
+            [Display(Name = "Pickup Day")]
+            public int DayOfWeek { get; set; }
+
+            public bool HasPassword { get; set; }
+          
+            public bool BrowserRemembered { get; set; }
     }
 
     public class ManageLoginsViewModel

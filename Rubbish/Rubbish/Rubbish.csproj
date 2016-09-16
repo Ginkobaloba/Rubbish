@@ -199,8 +199,8 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\Authenication.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
-    <Compile Include="Controllers\Customer_VacationController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -240,11 +240,27 @@
     <Compile Include="Migrations\201609151453478_removed Pickups.Designer.cs">
       <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609151527572_update address.cs" />
+    <Compile Include="Migrations\201609151527572_update address.Designer.cs">
+      <DependentUpon>201609151527572_update address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609151923115_update to address controller.cs" />
+    <Compile Include="Migrations\201609151923115_update to address controller.Designer.cs">
+      <DependentUpon>201609151923115_update to address controller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609152000326_datatype update.cs" />
+    <Compile Include="Migrations\201609152000326_datatype update.Designer.cs">
+      <DependentUpon>201609152000326_datatype update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609152018293_customerRegisterView.cs" />
+    <Compile Include="Migrations\201609152018293_customerRegisterView.Designer.cs">
+      <DependentUpon>201609152018293_customerRegisterView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Customer_Vacation.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -256,6 +272,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\justified-nav.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -333,27 +350,19 @@
     <Content Include="Views\Vacations\Details.cshtml" />
     <Content Include="Views\Vacations\Edit.cshtml" />
     <Content Include="Views\Vacations\Index.cshtml" />
-    <Content Include="Views\Vacation_Pickup\Create.cshtml" />
-    <Content Include="Views\Vacation_Pickup\Delete.cshtml" />
-    <Content Include="Views\Vacation_Pickup\Details.cshtml" />
-    <Content Include="Views\Vacation_Pickup\Edit.cshtml" />
-    <Content Include="Views\Vacation_Pickup\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Customer_Vacation\Create.cshtml" />
-    <Content Include="Views\Customer_Vacation\Delete.cshtml" />
-    <Content Include="Views\Customer_Vacation\Details.cshtml" />
-    <Content Include="Views\Customer_Vacation\Edit.cshtml" />
-    <Content Include="Views\Customer_Vacation\Index.cshtml" />
+    <Content Include="Views\Customers\RegisterCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Empty\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -387,6 +396,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609151453478_removed Pickups.resx">
       <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609151527572_update address.resx">
+      <DependentUpon>201609151527572_update address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609151923115_update to address controller.resx">
+      <DependentUpon>201609151923115_update to address controller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609152000326_datatype update.resx">
+      <DependentUpon>201609152000326_datatype update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609152018293_customerRegisterView.resx">
+      <DependentUpon>201609152018293_customerRegisterView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
