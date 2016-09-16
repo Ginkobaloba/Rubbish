@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Xml.Linq;
 
 
 namespace Rubbish.Controllers
@@ -82,18 +83,45 @@ namespace Rubbish.Controllers
             //break out into individual functions
 
 
-            Address address = new Address { StreetNumber = model.StreetNumber, StreetName = model.StreetNumber, City = model.City, State = model.State, ZipCode = model.ZipCode };
+            Address address = new Address { StreetNumber = model.StreetNumber, StreetName = model.StreetName, City = model.City, State = model.State, ZipCode = model.ZipCode };
 
             if (ModelState.IsValid)
             {
-                db.Addresses.Add(address);
 
-                var query = (from c in db.Customers where c.UserID == User.Identity.GetUserId() select c).FirstOrDefault();
+                var userid = User.Identity.GetUserId();
+                
+                var query = (from c in db.Customers where c.UserID == userid select c).FirstOrDefault();
 
                 query.AddressID = address.ID;
 
 
 
+                var stringAddress = address.StreetNumber + " " + address.StreetName + " " + address.City + " " + address.State + " " + address.ZipCode;
+
+                var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(stringAddress));
+
+                var request = WebRequest.Create(requestUri);
+                var response = request.GetResponse();
+                var xdoc = XDocument.Load(response.GetResponseStream());
+
+                var result = xdoc.Element("GeocodeResponse").Element("result");
+                var locationElement = result.Element("geometry").Element("location");
+                var lat = locationElement.Element("lat");
+                var lng = locationElement.Element("lng");
+                string stringlat = lat.ToString();
+                string stringlng = lng.ToString();
+                stringlat = stringlat.Substring(5, stringlat.IndexOf("</lat>") - 5);
+                stringlng = stringlng.Substring(5, stringlng.IndexOf("</lng>") - 5);
+
+
+                float longitude;
+                float latitude;
+                float.TryParse(stringlat, out latitude);
+                float.TryParse(stringlng, out longitude);
+
+                address.Lat = latitude;
+                address.Lng = longitude;
+    
                 int number;
                 int routenumber = 0;
 
@@ -114,6 +142,7 @@ namespace Rubbish.Controllers
 
                 try
                 {
+                    db.Addresses.Add(address);
                     db.SaveChanges();
                 }
                 catch (Exception e)

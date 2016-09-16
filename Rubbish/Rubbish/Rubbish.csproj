@@ -208,53 +208,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609131639135_initial migration.cs" />
-    <Compile Include="Migrations\201609131639135_initial migration.Designer.cs">
-      <DependentUpon>201609131639135_initial migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609131655590_added addresses.cs" />
-    <Compile Include="Migrations\201609131655590_added addresses.Designer.cs">
-      <DependentUpon>201609131655590_added addresses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609131851317_added customer.cs" />
-    <Compile Include="Migrations\201609131851317_added customer.Designer.cs">
-      <DependentUpon>201609131851317_added customer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609131908361_added Employees.cs" />
-    <Compile Include="Migrations\201609131908361_added Employees.Designer.cs">
-      <DependentUpon>201609131908361_added Employees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609132144275_updated models.cs" />
-    <Compile Include="Migrations\201609132144275_updated models.Designer.cs">
-      <DependentUpon>201609132144275_updated models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609141401043_sup.cs" />
-    <Compile Include="Migrations\201609141401043_sup.Designer.cs">
-      <DependentUpon>201609141401043_sup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609151441456_Complete rebuild.cs" />
-    <Compile Include="Migrations\201609151441456_Complete rebuild.Designer.cs">
-      <DependentUpon>201609151441456_Complete rebuild.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609151453478_removed Pickups.cs" />
-    <Compile Include="Migrations\201609151453478_removed Pickups.Designer.cs">
-      <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609151527572_update address.cs" />
-    <Compile Include="Migrations\201609151527572_update address.Designer.cs">
-      <DependentUpon>201609151527572_update address.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609151923115_update to address controller.cs" />
-    <Compile Include="Migrations\201609151923115_update to address controller.Designer.cs">
-      <DependentUpon>201609151923115_update to address controller.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609152000326_datatype update.cs" />
-    <Compile Include="Migrations\201609152000326_datatype update.Designer.cs">
-      <DependentUpon>201609152000326_datatype update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609152018293_customerRegisterView.cs" />
-    <Compile Include="Migrations\201609152018293_customerRegisterView.Designer.cs">
-      <DependentUpon>201609152018293_customerRegisterView.cs</DependentUpon>
+    <Compile Include="Migrations\201609161948402_changed to floats.cs" />
+    <Compile Include="Migrations\201609161948402_changed to floats.Designer.cs">
+      <DependentUpon>201609161948402_changed to floats.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -373,41 +329,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609131639135_initial migration.resx">
-      <DependentUpon>201609131639135_initial migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609131655590_added addresses.resx">
-      <DependentUpon>201609131655590_added addresses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609131851317_added customer.resx">
-      <DependentUpon>201609131851317_added customer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609131908361_added Employees.resx">
-      <DependentUpon>201609131908361_added Employees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609132144275_updated models.resx">
-      <DependentUpon>201609132144275_updated models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609141401043_sup.resx">
-      <DependentUpon>201609141401043_sup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609151441456_Complete rebuild.resx">
-      <DependentUpon>201609151441456_Complete rebuild.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609151453478_removed Pickups.resx">
-      <DependentUpon>201609151453478_removed Pickups.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609151527572_update address.resx">
-      <DependentUpon>201609151527572_update address.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609151923115_update to address controller.resx">
-      <DependentUpon>201609151923115_update to address controller.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609152000326_datatype update.resx">
-      <DependentUpon>201609152000326_datatype update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609152018293_customerRegisterView.resx">
-      <DependentUpon>201609152018293_customerRegisterView.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609161948402_changed to floats.resx">
+      <DependentUpon>201609161948402_changed to floats.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

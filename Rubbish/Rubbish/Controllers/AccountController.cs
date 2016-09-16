@@ -161,8 +161,6 @@ namespace Rubbish.Controllers
             {
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Password = model.Password, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
-
-
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -185,7 +183,7 @@ namespace Rubbish.Controllers
                     else
                     {
                         var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id), UserID = user.Id };
-
+               
                         db.Customers.Add(customer);
 
                         UserManager.AddToRole(user.Id, "Customer");

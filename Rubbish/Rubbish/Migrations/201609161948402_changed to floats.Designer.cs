@@ -7,13 +7,13 @@ namespace Rubbish.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addedEmployees : IMigrationMetadata
+    public sealed partial class changedtofloats : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedEmployees));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changedtofloats));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609131908361_added Employees"; }
+            get { return "201609161948402_changed to floats"; }
         }
         
         string IMigrationMetadata.Source
