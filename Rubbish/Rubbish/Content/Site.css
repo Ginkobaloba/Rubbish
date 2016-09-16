@@ -30,11 +30,11 @@ textarea {
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: lightseagreen;
 }
 
 .jumbotron h1 {
-  line-height: 3;
+  line-height: 1;
   color: inherit;
   text-align: center;
 }
@@ -42,6 +42,7 @@ textarea {
 .jumbotron p {
   line-height: 1;
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container .jumbotron {
