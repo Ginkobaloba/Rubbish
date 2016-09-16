@@ -47,7 +47,10 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.DayOfWeek, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DayOfWeek, new { @class = "form-control" })
+                        @{
+                            Html.DropDownListFor(model=> model.DayOfWeek, new SelectList(new List
+
+                        (model => model.DayOfWeek, new { @class = "form-control" })
                     </div>
                 </div>
                     <div class="form-group">

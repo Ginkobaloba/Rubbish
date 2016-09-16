@@ -191,7 +191,7 @@ namespace Rubbish.Controllers
                         UserManager.AddToRole(user.Id, "Customer");
                         db.SaveChanges();
 
-                        return RedirectToAction("Index", "Manage");
+                        return RedirectToAction("RegisterCustomer", "Customers");
 
                     }
                     //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();

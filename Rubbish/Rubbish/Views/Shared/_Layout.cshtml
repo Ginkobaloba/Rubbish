@@ -9,7 +9,10 @@
 
 </head>
 <body>
-
+    <div class="page-header">
+        <h1 style="text-indent: -20vw">Rubbish<br></h1>
+        <h1 style="text-indent: 5vw">Removal</h1>
+    </div>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -25,7 +28,6 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Hilary's Awesome", "Index", "Vacations")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Rubbish, Rubbish and More Rubbish, LLC.</p>
         </footer>
     </div>
 

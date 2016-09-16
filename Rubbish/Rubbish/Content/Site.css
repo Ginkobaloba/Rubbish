@@ -2,7 +2,13 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+body h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+}
+body h1 {
+    font-family: 'Bradley Hand ITC';
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -26,41 +32,51 @@ textarea {
 .jumbotron {
   padding: 30px;
   margin-bottom: 30px;
-  font-size: 70px;
   font-weight: 200;
-  line-height: 2.1428571435;
   color: inherit;
-  background-color: mediumseagreen;
+  background-image: url('http://www.livescience.com/images/i/000/016/161/original/garbage-bins-02.jpg?interpolation=lanczos-none&fit=inside%7C660:*');
+  background-size: 100vw;
 }
 
 .jumbotron h1 {
   line-height: 1;
   color: inherit;
   text-align: center;
+  font-size: 10vh;
 }
 
 .jumbotron p {
   line-height: 1;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: .85vw
+}
+.jumbotron h2 {
+    text-align: center;
 }
 
 .container .jumbotron {
   border-radius: 6px;
+  
 }
 
 @media screen and (min-width: 768px) {
   .jumbotron {
     padding-top: 48px;
     padding-bottom: 48px;
+    background-size: inherit;
+    background-color: mediumseagreen;
+     background-image: url('http://www.livescience.com/images/i/000/016/161/original/garbage-bins-02.jpg?interpolation=lanczos-none&fit=inside%7C660:*');
   }
   .container .jumbotron {
     padding-right: 60px;
     padding-left: 60px;
+    
   }
   .jumbotron h1 {
     font-size: 120px; 
     font-family:'Bradley Hand ITC';
+    
   }
 }
 
@@ -71,7 +87,8 @@ textarea {
   margin-bottom: 20px;
   border: 1px solid transparent;
   background-color: darkcyan;
-  color:azure;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 0;
 }
 .nav.navbar-nav li a {
    color: #fff !important;
@@ -81,12 +98,37 @@ textarea {
  color: lightgrey !important;
 }
 
-.nav.navbar-brand{
+.nav.navbar-brand a {
  color: #fff !important;
 }
 
-.nav.navbar-brand:hover {
+.nav.navbar-brand:hover a {
  color: lightgrey !important;
 }
+
+.navbar-inverse .navbar-brand {
+    color:white;
+}
+.navbar-inverse .navbar-brand:hover a {
+ color: lightgrey !important;
+}
+
+.page-header h1 {
+    font-family: 'Bradley Hand ITC';
+    font-size: 10vh;
+    line-height: 5vh;
+}
+
+.page-header {
+    text-align: center;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.body {
+    padding-top: 0;
+}
+
+
 
 

@@ -78,31 +78,75 @@ namespace Rubbish.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegisterCustomer(RegisterCustomerViewModel model)
         {
-            //logic for setting user info to database       //AddErrors(result);
+            //AddErrors(result);
+            //break out into individual functions
 
-            //some sort of try catch here?
+
+            Address address = new Address { StreetNumber = model.StreetNumber, StreetName = model.StreetNumber, City = model.City, State = model.State, ZipCode = model.ZipCode };
 
             if (ModelState.IsValid)
             {
+                db.Addresses.Add(address);
+
+                var query = (from c in db.Customers where c.UserID == User.Identity.GetUserId() select c).FirstOrDefault();
+
+                query.AddressID = address.ID;
+
+
+
+                int number;
+                int routenumber = 0;
+
+                int.TryParse(address.ZipCode, out number);
+
+                if (number < 20000)
+                    routenumber = 1;
+                else if (number < 30000)
+                    routenumber = 2;
+                else if (number < 40000)
+                    routenumber = 3;
+                else if (number < 50000)
+                    routenumber = 4;
+                else
+                    routenumber = 5;
+
+                address.RouteNumber = routenumber;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
+                return RedirectToAction("Index", "Manage");
+            }
+            return View(model);
+        }
+
+        private int? GetCustomerId()
+        {
+            try
+            {
+                string id = User.Identity.GetUserId();
+
+                int? query = (from C in db.Customers where C.UserID == id select C.ID).FirstOrDefault();
+
+                return query;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            } } 
 
         
 
 
 
-                return RedirectToAction("Index", "Manage");
-
-            }
-            //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
-
-            db.SaveChanges();
-            // evaluate roles
-
-  
-            
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
