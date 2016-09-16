@@ -30,7 +30,7 @@ textarea {
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: lightseagreen;
+  background-color: mediumseagreen;
 }
 
 .jumbotron h1 {
@@ -70,5 +70,23 @@ textarea {
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  color: darkorchid;
+  background-color: darkcyan;
+  color:azure;
 }
+.nav.navbar-nav li a {
+   color: #fff !important;
+ }
+
+.nav.navbar-nav a:hover {
+ color: lightgrey !important;
+}
+
+.nav.navbar-brand{
+ color: #fff !important;
+}
+
+.nav.navbar-brand:hover {
+ color: lightgrey !important;
+}
+
+

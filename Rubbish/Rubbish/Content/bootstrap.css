@@ -3833,7 +3833,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-  color: #999999;
+  color: green;
   text-decoration: none;
   cursor: not-allowed;
   background-color: transparent;
