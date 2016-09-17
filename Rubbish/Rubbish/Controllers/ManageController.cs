@@ -8,6 +8,16 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Rubbish.Models;
 
+using System.Data;
+using System.Data.Entity;
+
+using System.Net;
+
+using System.Globalization;
+using System.Security.Claims;
+
+using System.Xml.Linq;
+
 namespace Rubbish.Controllers
 {
     [Authorize]
@@ -15,7 +25,7 @@ namespace Rubbish.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ManageController()
         {
         }
@@ -62,12 +72,31 @@ namespace Rubbish.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
+           var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
             var userId = User.Identity.GetUserId();
+            var query = (from a in customers where a.UserID == userId select a).FirstOrDefault();
+
+
             var model = new IndexViewModel
             {
+
                 HasPassword = HasPassword(),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                City = query.Address.City,
+                State = query.Address.State,
+                ZipCode = query.Address.ZipCode,
+                Email = query.ApplicationUser.Email,
+                StreetNumber = query.Address.StreetNumber,
+                StreetName = query.Address.StreetName,
+                PhoneNumber = query.ApplicationUser.PhoneNumber,
+                FirstName = query.ApplicationUser.FirstName,
+                LastName = query.ApplicationUser.LastName,
+                DayOfWeek = query.DayOfWeek,
+                MoneyOwed = 100,
+
+
+
+
             };
             return View(model);
         }

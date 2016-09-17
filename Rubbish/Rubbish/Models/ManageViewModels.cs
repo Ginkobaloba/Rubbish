@@ -44,11 +44,14 @@ namespace Rubbish.Models
             public string ZipCode { get; set; }
 
             [Display(Name = "Pickup Day")]
-            public int DayOfWeek { get; set; }
+            public string DayOfWeek { get; set; }
 
             public bool HasPassword { get; set; }
           
             public bool BrowserRemembered { get; set; }
+
+            [Display(Name = "Balance Owed")]
+            public decimal MoneyOwed { get; set; }
     }
 
     public class ManageLoginsViewModel

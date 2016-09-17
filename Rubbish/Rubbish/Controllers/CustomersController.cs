@@ -93,7 +93,7 @@ namespace Rubbish.Controllers
                 var query = (from c in db.Customers where c.UserID == userid select c).FirstOrDefault();
 
                 query.AddressID = address.ID;
-
+                query.DayOfWeek = model.DayOfWeek;
 
 
                 var stringAddress = address.StreetNumber + " " + address.StreetName + " " + address.City + " " + address.State + " " + address.ZipCode;

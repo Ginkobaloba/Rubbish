@@ -208,9 +208,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609161948402_changed to floats.cs" />
-    <Compile Include="Migrations\201609161948402_changed to floats.Designer.cs">
-      <DependentUpon>201609161948402_changed to floats.cs</DependentUpon>
+    <Compile Include="Migrations\201609162140406_happy face.cs" />
+    <Compile Include="Migrations\201609162140406_happy face.Designer.cs">
+      <DependentUpon>201609162140406_happy face.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609162330493_string dayofweek.cs" />
+    <Compile Include="Migrations\201609162330493_string dayofweek.Designer.cs">
+      <DependentUpon>201609162330493_string dayofweek.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -329,8 +333,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609161948402_changed to floats.resx">
-      <DependentUpon>201609161948402_changed to floats.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609162140406_happy face.resx">
+      <DependentUpon>201609162140406_happy face.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609162330493_string dayofweek.resx">
+      <DependentUpon>201609162330493_string dayofweek.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,31 +6,45 @@
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
+
 <div>
     <h4>Your account</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
+    <div class="row">
+        @Html.LabelFor(model => model.DayOfWeek, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.DayOfWeek)
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.MoneyOwed, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.MoneyOwed)
+        </div>
+    </div>
+
+    </div>
+    <div>
+        <h4>Change Password</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Password:</dt>
+            <dd>
+                [
+                @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+                ]
+            </dd>
 
-    </dl>
-</div>
+        </dl>
+    </div>
 
-
-<h2>@ViewBag.Title.</h2>
-
-@*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
 
     @Html.AntiForgeryToken()
     <h4>Update Your Account.</h4>
@@ -41,73 +55,73 @@
     <div class="row">
         @Html.LabelFor(model => model.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayFor(model => model.Email)
         </div>
     </div>
-        <div class="row">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </div>
+    <div class="row">
+        @Html.LabelFor(model => model.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.DisplayNameFor(model => model.FirstName)       
-            </div>
-            @*<td>
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </div>
+        @*<td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>*@
-            </div>
+    </div>
 
-        <div class="row">
-        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+    <div class="row">
+        @Html.LabelFor(model => model.LastName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayFor(model => model.LastName)
         </div>
-            </div>
-            <div class="row">
-                @Html.LabelFor(m => m.StreetName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.DisplayNameFor(model => model.StreetName)
-                </div>
-                </div>
-                <div class="row">
-                    @Html.LabelFor(m => m.StreetNumber, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.DisplayNameFor(model => model.StreetNumber)
-                    </div>
-                </div>
-                <div class="row">
-                    @Html.LabelFor(model => model.City, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.DisplayNameFor(model => model.City)
-                    </div>
-                </div>
-                <div class="row">
-                    @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.DisplayNameFor(model => model.State)
-                    </div>
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(model => model.ZipCode, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.DisplayNameFor(model => model.ZipCode)
-                        </div>
-                    </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.StreetName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.StreetName)
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.StreetNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.StreetNumber)
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.City)
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.State)
+        </div>
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.ZipCode, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.ZipCode)
+        </div>
+    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Edit", "Customer")'">EDIT</button>
-                        </div>
-                       
-                        </div>
-                   
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Edit", "Edit", "Customer")'">EDIT</button>
+        </div>
+
+    </div>
 
 
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jqueryval")
-                    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

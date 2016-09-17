@@ -175,15 +175,19 @@ namespace Rubbish.Controllers
 
                     if (model.Passcode == passcode)
                     {
-                        db.Employees.Add(new Employee() { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id });
+                        var employee = new Employee { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id };
+
+                        db.Employees.Add(employee);
 
                         var result1 = UserManager.AddToRole(user.Id, "Employee");
-                        //Something with redirect here                       
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index", "Addresses");
                     }
                     else
                     {
                         var customer = new Customer { MoneyOwed = 0, ApplicationUser = db.Users.Find(user.Id), UserID = user.Id };
-               
+
                         db.Customers.Add(customer);
 
                         UserManager.AddToRole(user.Id, "Customer");
@@ -194,17 +198,15 @@ namespace Rubbish.Controllers
                     }
                     //List<System.Data.Entity.Validation.DbEntityValidationResult> x = db.GetValidationErrors().ToList();
 
-                    db.SaveChanges();
-                    // evaluate roles
 
+
+                    
                 }
-                AddErrors(result);
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-       
 
         //
         // GET: /Account/ConfirmEmail
