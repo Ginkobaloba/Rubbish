@@ -100,6 +100,44 @@ namespace Rubbish.Controllers
             };
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCustomerAccountInformation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditCustomerAccountInformation(IndexViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            { 
+            var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
+            var userId = User.Identity.GetUserId();
+            var query = (from a in customers where a.UserID == userId select a).FirstOrDefault();
+
+                query.Address.City = model.City;
+                query.Address.State = model.State;
+                query.Address.ZipCode = model.ZipCode;
+                query.ApplicationUser.Email = model.Email;
+                query.Address.StreetNumber = model.StreetNumber;
+                query.Address.StreetName = model.StreetName;
+                query.ApplicationUser.PhoneNumber = model.PhoneNumber;
+                query.ApplicationUser.FirstName = model.FirstName;
+                query.ApplicationUser.LastName = model.LastName;
+                query.DayOfWeek = model.DayOfWeek;
+                db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+            return View(model);
+        }
+
 
         //
         // POST: /Manage/RemoveLogin

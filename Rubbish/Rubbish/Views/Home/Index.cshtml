@@ -1,18 +1,50 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+
+
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="container">
 <div class="jumbotron">
     <p>You know what they say about one man's trash...</p>
-    <p><a class="btn btn-primary btn-lg" value="About">Learn more &raquo;</a></p>
-</div>
-</div>
-<div class="container">
-    @*<div class="col-md-6">*@
-
-        <h1><strong>New to Rubbish Removal?</strong></h1>
-        <p>Sign up today and we'll start collecting your rubbish tomorrow.</p>
-    <p>@Html.ActionLink("Sign Up Now", "Register", "Account") &raquo;</p>
     </div>
-@*</div>*@
+
+    @if (Request.IsAuthenticated)
+    {
+       
+        if (User.IsInRole("Customer"))
+        {
+            @*<div class="col-md-6">*@
+            <div class="container">
+                <h1><strong>Going on a Vacation?</strong></h1>
+                <p>If you want to cancel your pickup for the time you'll be away, you can!</p>
+                <p>@Html.ActionLink("Go On a Vacation", "Index", "Vacations") &raquo;</p>
+            </div>
+
+        }
+        else if (User.IsInRole("Employee"))
+        {
+            <div class="container">
+                <h1><strong>Check Your Route</strong></h1>
+                <p>Click here to see your route</p>
+                <p>@Html.ActionLink("Today's Route", "Index", "Addresses") &raquo;</p>
+            </div>
+        }
+
+        else
+        { <div class="container">
+        <div class="jumbotron">
+            <p>You know what they say about one man's trash...</p>
+            <p><a class="btn btn-primary btn-lg" value="About">Learn more &raquo;</a></p>
+        </div>
+
+            </div>
+    @*<div class="col-md-6">*@
+            <div class="container">
+                <h1><strong>New to Rubbish Removal?</strong></h1>
+                <p>Sign up today and we'll start collecting your rubbish tomorrow.</p>
+                <p>@Html.ActionLink("Sign Up Now", "Register", "Account") &raquo;</p>
+            </div>
+        }
+    }

@@ -33,10 +33,10 @@ namespace Rubbish.Models
             [Display(Name = "Zip")]
             public string ZipCode { get; set; }
 
-        [Required]
+            [Required]
 
-        [Display(Name = "Day of Week")]
-        public string DayOfWeek { get; set; }
+            [Display(Name = "Day of Week")]
+            public string DayOfWeek { get; set; }
 
     }
     }
