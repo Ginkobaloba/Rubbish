@@ -12,10 +12,9 @@
 
     @if (Request.IsAuthenticated)
     {
-
+        
         if (User.IsInRole("Customer"))
         {
-            @*<div class="col-md-6">*@
             <div class="container">
                 <h1><strong>Going on a Vacation?</strong></h1>
                 <p>If you want to cancel your pickup for the time you'll be away, you can!</p>

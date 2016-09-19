@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using Rubbish.Models;
 
+using Microsoft.AspNet.Identity;
+
+
 namespace Rubbish.Controllers
 {
     public class AddressesController : Controller
@@ -17,7 +20,22 @@ namespace Rubbish.Controllers
         // GET: Addresses
         public ActionResult Index()
         {
-            return View(db.Addresses.ToList());
+            var userId = User.Identity.GetUserId();
+
+
+            var employee = (from e in db.Employees where userId == e.UserID select e).FirstOrDefault();
+            
+            int routeNumber = employee.RouteNumber;
+
+            string day = DateTime.Now.DayOfWeek.ToString().ToLower();
+            var customer = db.Customers.Include(a => a.Vacation).Where(b=>b.Vacation.StartDate < DateTime.Now.Date)
+                .Where(c => c.Vacation.EndDate > DateTime.Now.Date);
+
+
+
+                    
+            return View(db.Customers.Include(c => c.Address).Where(a => a.DayOfWeek == day)
+                .Where(d => d.Address.RouteNumber == routeNumber).Where(b => b.IsActive == true).ToList());
         }
 
         // GET: Addresses/Details/5
