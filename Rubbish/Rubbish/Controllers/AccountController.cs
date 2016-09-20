@@ -175,7 +175,7 @@ namespace Rubbish.Controllers
 
                     if (model.Passcode == passcode)
                     {
-                        var employee = new Employee { RouteNumber = random.Next(1, 6), /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id };
+                        var employee = new Employee { RouteNumber = 5, /*ApplicationUser = db.Users.Find(user.Id)*/ UserID = user.Id };
 
                         db.Employees.Add(employee);
 

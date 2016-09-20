@@ -9,7 +9,7 @@ namespace Rubbish.Models
         {
             [Required]
             [StringLength(30)]
-            [Display(Name = "Street Address")]
+            [Display(Name = "Street Number")]
             public string StreetNumber { get; set; }
 
 
