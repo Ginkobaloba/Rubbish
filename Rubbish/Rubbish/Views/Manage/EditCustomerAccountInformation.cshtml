@@ -3,74 +3,80 @@
     ViewBag.Title = "Edit Your Account Information";
 }
 
-<h2>ViewBag.Title</h2>
+<h2>@ViewBag.Title.</h2>
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4>Enter Updates Here</h4>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model)
+        @Html.AntiForgeryToken()
 
         <div class="form-group">
             @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.EditorFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.EditorFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.EditorFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                @Html.EditorFor(m => m.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.City, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                @Html.EditorFor(model => model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.StreetNumber, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.StreetNumber, new { @class = "form-control" })
+                @Html.EditorFor(m => m.StreetNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StreetNumber, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.StreetName, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.StreetName, new { @class = "form-control" })
+                @Html.EditorFor(m => m.StreetName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+                @Html.EditorFor(m => m.State, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.ZipCode, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ZipCode, new { @class = "form-control" })
+                @Html.EditorFor(model => model.ZipCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
             </div>
         </div>
         <h4>Enter Day of The Week You Would Like the Pickup to Be</h4>
         <div class="form-group">
-            @Html.LabelFor(model => model.DayOfWeek, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @{
                     List<SelectListItem> listItems = new List<SelectListItem>();

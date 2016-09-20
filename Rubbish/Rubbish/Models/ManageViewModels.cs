@@ -8,50 +8,52 @@ namespace Rubbish.Models
     public class IndexViewModel
     {
 
-     
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
-            [Display(Name = "Email")]
-            public string Email { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-   
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
 
-     
-            [Display(Name = "Phone Number")]
-            public string PhoneNumber { get; set; }
-  
-  
-            [Display(Name = "Street Address")]
-            public string StreetNumber { get; set; }
+        [Required]
+        [Display(Name = "Street Address")]
+        public string StreetNumber { get; set; }
 
+        [Required]
+        [Display(Name = "Street Name")]
+        public string StreetName { get; set; }
 
+        [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
 
-            [Display(Name = "Street Name")]
-            public string StreetName { get; set; }
+        [Required]
+        [Display(Name = "State")]
+        public string State { get; set; }
 
-            [Display(Name = "City")]
-            public string City { get; set; }
+        [Required]
+        [Display(Name = "Zip")]
+        public string ZipCode { get; set; }
 
+        [Required]
+        [Display(Name = "Pickup Day")]
+        public string DayOfWeek { get; set; }
 
-            [Display(Name = "State")]
-            public string State { get; set; }
+        public bool HasPassword { get; set; }
 
-            [Display(Name = "Zip")]
-            public string ZipCode { get; set; }
+        public bool BrowserRemembered { get; set; }
 
-            [Display(Name = "Pickup Day")]
-            public string DayOfWeek { get; set; }
-
-            public bool HasPassword { get; set; }
-          
-            public bool BrowserRemembered { get; set; }
-
-            [Display(Name = "Balance Owed")]
-            public decimal MoneyOwed { get; set; }
+        [Display(Name = "Balance Owed")]
+        public decimal MoneyOwed { get; set; }
     }
 
     public class ManageLoginsViewModel

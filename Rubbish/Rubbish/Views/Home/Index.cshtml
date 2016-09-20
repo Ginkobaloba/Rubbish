@@ -1,6 +1,7 @@
-﻿@using Microsoft.AspNet.Identity
-
-
+﻿@using Microsoft.AspNet.Identity;
+@using System.Web.Security;
+@using System.Web.ApplicationServices;
+@using System.Security.Principal;
 
 @{
     ViewBag.Title = "Home Page";
@@ -9,12 +10,12 @@
 <div class="jumbotron">
     <h2>Home Collection Services</h2>
     </div>
-
+<body>
     @if (Request.IsAuthenticated)
-    {
-        
-        if (User.IsInRole("Customer"))
-        {
+                {
+
+                    if (User.IsInRole("Customer"))
+                    {
             <div class="container">
                 <h1><strong>Going on a Vacation?</strong></h1>
                 <p>If you want to cancel your pickup for the time you'll be away, you can!</p>
@@ -39,4 +40,4 @@
                 <p>@Html.ActionLink("Sign Up Now", "Register", "Account") &raquo;</p>
             </div>
         }
-    
+</body> 

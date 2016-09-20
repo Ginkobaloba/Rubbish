@@ -26,6 +26,7 @@ namespace Rubbish.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
+        private Management management = new Management();
         public ManageController()
         {
         }
@@ -42,9 +43,9 @@ namespace Rubbish.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -72,10 +73,13 @@ namespace Rubbish.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-           var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
+
+
+            var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
             var userId = User.Identity.GetUserId();
             var query = (from a in customers where a.UserID == userId select a).FirstOrDefault();
-
+            var vacation = (from c in db.Vacations where c.ID == query.VacationID select c).FirstOrDefault();
+            decimal pickupPrice = 100;
 
             var model = new IndexViewModel
             {
@@ -92,27 +96,45 @@ namespace Rubbish.Controllers
                 FirstName = query.ApplicationUser.FirstName,
                 LastName = query.ApplicationUser.LastName,
                 DayOfWeek = query.DayOfWeek,
-                MoneyOwed = 100,
+                MoneyOwed = pickupPrice * management.GetTotalDays(vacation, query),
+
+            };
+            return View(model);
+        }
+
+       
 
 
+        public ActionResult EditCustomerAccountInformation()
+        {
+            var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
+            var userId = User.Identity.GetUserId();
+            var query = (from a in customers where a.UserID == userId select a).FirstOrDefault();
+            string id = User.Identity.GetUserId().ToString();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = new IndexViewModel
+            {
 
+                City = query.Address.City,
+                State = query.Address.State,
+                ZipCode = query.Address.ZipCode,
+                Email = query.ApplicationUser.Email,
+                StreetNumber = query.Address.StreetNumber,
+                StreetName = query.Address.StreetName,
+                PhoneNumber = query.ApplicationUser.PhoneNumber,
+                FirstName = query.ApplicationUser.FirstName,
+                LastName = query.ApplicationUser.LastName,
+                DayOfWeek = query.DayOfWeek
 
             };
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditCustomerAccountInformation(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCustomerAccountInformation(IndexViewModel model)
+        public ActionResult EditCustomerAccountInformation([Bind(Include = "City,State,ZipCode,Email,StreetNumber,StreetName,PhoneNumber,FirstName,LastName,DayOfWeek")]IndexViewModel model)
         {
 
             if (ModelState.IsValid)
@@ -120,18 +142,22 @@ namespace Rubbish.Controllers
             var customers = db.Customers.Include(c => c.ApplicationUser).Include(d => d.Address).ToList();
             var userId = User.Identity.GetUserId();
             var query = (from a in customers where a.UserID == userId select a).FirstOrDefault();
+            GeoCoder geoCoder = new GeoCoder();
+            geoCoder.UpdateCoordinates(query.Address);
 
-                query.Address.City = model.City;
-                query.Address.State = model.State;
-                query.Address.ZipCode = model.ZipCode;
-                query.ApplicationUser.Email = model.Email;
-                query.Address.StreetNumber = model.StreetNumber;
-                query.Address.StreetName = model.StreetName;
-                query.ApplicationUser.PhoneNumber = model.PhoneNumber;
-                query.ApplicationUser.FirstName = model.FirstName;
-                query.ApplicationUser.LastName = model.LastName;
-                query.DayOfWeek = model.DayOfWeek;
+                     query.Address.City = model.City;
+                    query.Address.State = model.State;
+                    query.Address.ZipCode = model.ZipCode;
+                    query.ApplicationUser.Email = model.Email;
+                    query.Address.StreetNumber = model.StreetNumber;
+                    query.Address.StreetName = model.StreetName;
+                    query.ApplicationUser.PhoneNumber = model.PhoneNumber;
+                    query.ApplicationUser.FirstName = model.FirstName;
+                    query.ApplicationUser.LastName = model.LastName;
+                    query.DayOfWeek = model.DayOfWeek;
                 db.SaveChanges();
+
+                //update with geocoder
 
             return RedirectToAction("Index");
         }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Rubbish.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Rubbish.Controllers
 {
@@ -17,7 +18,10 @@ namespace Rubbish.Controllers
         // GET: Vacations
         public ActionResult Index()
         {
-            return View(db.Vacations.ToList());
+            string UserId = User.Identity.GetUserId().ToString();
+            var customer = (from c in db.Customers where c.UserID == UserId select c).FirstOrDefault();
+            List<Vacation> vacations = (from v in db.Vacations where v.ID == customer.VacationID select v).ToList();
+            return View(vacations);
         }
 
         // GET: Vacations/Details/5
@@ -59,18 +63,13 @@ namespace Rubbish.Controllers
         }
 
         // GET: Vacations/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Vacation vacation = db.Vacations.Find(id);
-            if (vacation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vacation);
+
+            string UserId = User.Identity.GetUserId().ToString();
+            var customer = (from c in db.Customers where c.UserID == UserId select c).FirstOrDefault();
+            var vacations = (from v in db.Vacations where v.ID == customer.VacationID select v).FirstOrDefault();
+            return View(vacations);
         }
 
         // POST: Vacations/Edit/5

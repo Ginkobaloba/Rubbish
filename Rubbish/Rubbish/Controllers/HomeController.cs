@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Web.Mvc;
 using Rubbish.Models;
-using System.Globalization;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System.Xml.Linq;
-
-
+using Microsoft.AspNet.Identity.EntityFramework;
 namespace Rubbish.Controllers
 {
     public class HomeController : Controller
-  {
+    { /* var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationContext()));*/
         private ApplicationDbContext db = new ApplicationDbContext();
-        [Authorize]
+
+
         public ActionResult Index()
         {
+
+            //var rolesForUser = await UserManager.GetRolesAsync(userId);
+
+            // rolesForUser now has a list role classes.
             return View();
         }
 

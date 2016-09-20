@@ -15,6 +15,9 @@ namespace Rubbish.Controllers
 {
     public class AddressesController : Controller
     {
+        string day = DateTime.Now.DayOfWeek.ToString().ToLower();
+
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Addresses
@@ -22,20 +25,39 @@ namespace Rubbish.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-
             var employee = (from e in db.Employees where userId == e.UserID select e).FirstOrDefault();
             
             int routeNumber = employee.RouteNumber;
+            FindVacations(routeNumber);
+            var customers = db.Customers.Include(c => c.Address).Where(a => a.DayOfWeek.ToLower() == day)
+                     .Where(d => d.Address.RouteNumber == routeNumber).Where(b => b.IsActive == true).ToList();
 
-            string day = DateTime.Now.DayOfWeek.ToString().ToLower();
-            var customer = db.Customers.Include(a => a.Vacation).Where(b=>b.Vacation.StartDate < DateTime.Now.Date)
-                .Where(c => c.Vacation.EndDate > DateTime.Now.Date);
+            List<Address> addresses = new List<Address>();
+            foreach (var item in customers)
+            {
+                addresses.Add(item.Address);
+            }
+            
+            return View(addresses);
 
+        }
+        private void FindVacations(int routeNumber)
+        {
+            List<Customer> allCustomers = db.Customers.Include(c => c.Address).Where(a => a.DayOfWeek == day)
+                   .Where(d => d.Address.RouteNumber == routeNumber).ToList();
+            foreach (var c in allCustomers)
+            {
+                c.IsActive = true;
+                db.SaveChanges();
+            }
+            var nowDate = DateTime.Now.Date;
+            List<Customer> customers = db.Customers.Include(a => a.Vacation).Where(b => b.Vacation.StartDate <= nowDate)
+                .Where(c => c.Vacation.EndDate >= nowDate).ToList();
+            foreach (var c in customers)
+            { c.IsActive = false;
+                db.SaveChanges();
+            }
 
-
-                    
-            return View(db.Customers.Include(c => c.Address).Where(a => a.DayOfWeek == day)
-                .Where(d => d.Address.RouteNumber == routeNumber).Where(b => b.IsActive == true).ToList());
         }
 
         // GET: Addresses/Details/5
@@ -100,6 +122,7 @@ namespace Rubbish.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(address).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

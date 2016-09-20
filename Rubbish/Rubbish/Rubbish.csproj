@@ -200,6 +200,8 @@
     <Compile Include="Controllers\Authenication.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\GeoCoder.cs" />
+    <Compile Include="Controllers\Management.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,13 +210,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609162140406_happy face.cs" />
-    <Compile Include="Migrations\201609162140406_happy face.Designer.cs">
-      <DependentUpon>201609162140406_happy face.cs</DependentUpon>
+    <Compile Include="Migrations\201609191542182_happy face.cs" />
+    <Compile Include="Migrations\201609191542182_happy face.Designer.cs">
+      <DependentUpon>201609191542182_happy face.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609162330493_string dayofweek.cs" />
-    <Compile Include="Migrations\201609162330493_string dayofweek.Designer.cs">
-      <DependentUpon>201609162330493_string dayofweek.cs</DependentUpon>
+    <Compile Include="Migrations\201609191639012_datetime update.cs" />
+    <Compile Include="Migrations\201609191639012_datetime update.Designer.cs">
+      <DependentUpon>201609191639012_datetime update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609192012488_reverting to non nullable dates.cs" />
+    <Compile Include="Migrations\201609192012488_reverting to non nullable dates.Designer.cs">
+      <DependentUpon>201609192012488_reverting to non nullable dates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -225,6 +231,7 @@
     <Compile Include="Models\EmployeeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RolesViewModel.cs" />
     <Compile Include="Models\Vacation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -336,11 +343,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609162140406_happy face.resx">
-      <DependentUpon>201609162140406_happy face.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609191542182_happy face.resx">
+      <DependentUpon>201609191542182_happy face.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609162330493_string dayofweek.resx">
-      <DependentUpon>201609162330493_string dayofweek.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609191639012_datetime update.resx">
+      <DependentUpon>201609191639012_datetime update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192012488_reverting to non nullable dates.resx">
+      <DependentUpon>201609192012488_reverting to non nullable dates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

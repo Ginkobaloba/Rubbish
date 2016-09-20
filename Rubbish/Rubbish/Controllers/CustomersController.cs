@@ -22,6 +22,7 @@ namespace Rubbish.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: Customers
         public ActionResult Index()
         {
@@ -82,79 +83,62 @@ namespace Rubbish.Controllers
             //AddErrors(result);
             //break out into individual functions
 
-
-            Address address = new Address { StreetNumber = model.StreetNumber, StreetName = model.StreetName, City = model.City, State = model.State, ZipCode = model.ZipCode };
+        GeoCoder geoCoder = new GeoCoder();
+        Address address = new Address { StreetNumber = model.StreetNumber, StreetName = model.StreetName, City = model.City, State = model.State, ZipCode = model.ZipCode };
 
             if (ModelState.IsValid)
             {
+                Vacation vacation = new Vacation { StartDate = new DateTime(2000, 1, 1), EndDate = new DateTime(2000, 1, 1) } ;
+                var userid = User.Identity.GetUserId();                           
+                db.Addresses.Add(address);
+                db.Vacations.Add(vacation);
 
-                var userid = User.Identity.GetUserId();
-                
                 var query = (from c in db.Customers where c.UserID == userid select c).FirstOrDefault();
-
+                query.VacationID = vacation.ID;
                 query.AddressID = address.ID;
                 query.DayOfWeek = model.DayOfWeek;
 
-
-                var stringAddress = address.StreetNumber + " " + address.StreetName + " " + address.City + " " + address.State + " " + address.ZipCode;
-
-                var requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(stringAddress));
-
-                var request = WebRequest.Create(requestUri);
-                var response = request.GetResponse();
-                var xdoc = XDocument.Load(response.GetResponseStream());
-
-                var result = xdoc.Element("GeocodeResponse").Element("result");
-                var locationElement = result.Element("geometry").Element("location");
-                var lat = locationElement.Element("lat");
-                var lng = locationElement.Element("lng");
-                string stringlat = lat.ToString();
-                string stringlng = lng.ToString();
-                stringlat = stringlat.Substring(5, stringlat.IndexOf("</lat>") - 5);
-                stringlng = stringlng.Substring(5, stringlng.IndexOf("</lng>") - 5);
+                address = geoCoder.UpdateCoordinates(address);
+                SetRouteNumber(address);
 
 
-                float longitude;
-                float latitude;
-                float.TryParse(stringlat, out latitude);
-                float.TryParse(stringlng, out longitude);
+                db.SaveChanges();
 
-                address.Lat = latitude;
-                address.Lng = longitude;
-    
-                int number;
-                int routenumber = 0;
-
-                int.TryParse(address.ZipCode, out number);
-
-                if (number < 20000)
-                    routenumber = 1;
-                else if (number < 30000)
-                    routenumber = 2;
-                else if (number < 40000)
-                    routenumber = 3;
-                else if (number < 50000)
-                    routenumber = 4;
-                else
-                    routenumber = 5;
-
-                address.RouteNumber = routenumber;
-
-                try
-                {
-                    db.Addresses.Add(address);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
+                //try
+                //{ 
+                //    db.SaveChanges();
+                //}
+                //catch (Exception e)
+                //{
+                //    Console.WriteLine(e);
+                //}
 
                 return RedirectToAction("Index", "Manage");
             }
             return View(model);
         }
 
+        private void SetRouteNumber(Address address)
+        {
+            int number;
+            int routenumber = 0;
+
+            int.TryParse(address.ZipCode, out number);
+
+            if (number < 20000)
+                routenumber = 1;
+            else if (number < 30000)
+                routenumber = 2;
+            else if (number < 40000)
+                routenumber = 3;
+            else if (number < 50000)
+                routenumber = 4;
+            else
+                routenumber = 5;
+
+            address.RouteNumber = routenumber;
+
+        }
         private int? GetCustomerId()
         {
             try
@@ -179,15 +163,15 @@ namespace Rubbish.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
+            //if (customer == null)
+            //{
+            //    return HttpNotFound();
+            //}
             ViewBag.UserID = new SelectList(db.Users, "Id", "FirstName", customer.UserID);
             return View(customer);
         }
